@@ -1,0 +1,108 @@
+description: Multi-population Nama and SAC model.
+time_units: years
+generation_time: 25
+
+demes:
+- name: Ancestral
+  description: Equilibrium/root population
+  epochs:
+  - {end_time: 1e6, start_size: 7300}
+- name: Stem1
+  description: Anatomically modern humans
+  ancestors: [Ancestral]
+  epochs:
+  - {end_time: 140e3, start_size: 7300}
+- name: Stem2
+  description: Anatomically modern humans
+  ancestors: [Ancestral]
+  epochs:
+  - {end_time: 5e3, start_size: 12300}
+- name: Neanderthal
+  description: Neanderthal
+  ancestors: [Stem1]
+  start_time: 6e5
+  epochs:
+  - {end_time: 55e3, start_size: 2000}
+- name: Nama
+  description: Nama
+  ancestors: [Stem1]
+  epochs:
+  - {end_time: 300, start_size: 10000}
+  - {end_time: 0, end_size: 500}
+- name: Gumuz
+  description: Gumuz
+  ancestors: [Stem1]
+  epochs:
+  - {end_time: 5000, start_size: 5000}
+  - {end_time: 0, end_size: 2500}
+- name: MSL
+  description: MSL
+  ancestors: [Gumuz]
+  start_time: 65e3
+  epochs:
+  - {end_time: 5e3, start_size: 9000}
+  - {end_time: 0, end_size: 27000}
+- name: GBR
+  description: Bottleneck OOA
+  ancestors: [Gumuz]
+  start_time: 60e3
+  epochs:
+  - {end_time: 0, start_size: 2000, end_size: 10000}
+- name: LWK
+  description: Eastern Pastorialists
+  ancestors: [GBR, Gumuz]
+  proportions: [0.4,0.6]
+  start_time: 15e3
+  epochs:
+  - {end_time: 0, start_size: 10000}
+- name: AS
+  description: Asian
+  ancestors: [GBR]
+  start_time: 45e3
+  epochs:
+  - {end_time: 15e3, start_size: 2000, end_size: 10000}
+- name: CHB
+  description: East Asian
+  ancestors: [AS]
+  epochs:
+  - {end_time: 0, start_size: 2000, end_size: 10000}
+- name: GIH
+  description: South Asian
+  ancestors: [GBR, AS]
+  start_time: 15e3
+  proportions: [0.1, 0.9]
+  epochs:
+  - {end_time: 0, start_size: 5000, end_size: 10000}
+- name: SAC
+  description: South African Coloured
+  ancestors: [Nama, GBR, CHB, GIH, MSL]
+  proportions: [0.35, 0.175, 0.1, 0.125, 0.25]
+  start_time: 400
+  epochs:
+  - {end_time: 0, start_size: 2000, end_size: 10000}
+pulses:
+- {source: Neanderthal, dest: GBR, time: 55e3, proportion: 0.1}
+- {source: LWK, dest: Nama, time: 2e3, proportion: 0.1}
+- {source: GBR, dest: Nama, time: 350, proportion: 0.15}
+migrations:
+- {demes: [Stem1, Stem2], rate: 1.9e-5}
+- {demes: [Nama, Stem2], rate: 1.9e-5}
+- {demes: [MSL, Stem2], rate: 1.9e-5}
+- {demes: [Gumuz, Stem2], rate: 1.9e-5}
+- {demes: [LWK, Stem2], rate: 1.9e-5}
+- {demes: [Nama, MSL], rate: 9.6e-5}
+- {demes: [Nama, Gumuz], rate: 9.6e-5}
+- {demes: [Gumuz, MSL], rate: 25e-5}
+- {demes: [LWK, MSL], rate: 25e-5}
+- {demes: [Gumuz, LWK], rate: 25e-5}
+- {demes: [Gumuz, GBR], rate: 3e-5}
+- {demes: [LWK, GBR], rate: 3e-5}
+- {demes: [CHB, GIH], rate: 25e-5}
+- {demes: [CHB, GBR], rate: 9.6e-5}
+- {demes: [GIH, GBR], rate: 9.6e-5}
+- {demes: [LWK, CHB], rate: 1.9e-5}
+- {demes: [LWK, GIH], rate: 1.9e-5}
+- {demes: [MSL, CHB], rate: 1.9e-5}
+- {demes: [MSL, GIH], rate: 1.9e-5}
+- {demes: [Gumuz, GIH], rate: 1.9e-5}
+- {demes: [Gumuz, CHB], rate: 1.9e-5}
