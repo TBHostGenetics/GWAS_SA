@@ -1,0 +1,6 @@
+#Generate trees and vcfs
+for i in $(seq 1 22); do python3 gen_trees.py multi-way-demese.yaml ${i} multi_sim_5000_${i} 5000; done
+
+bcftools annotate --set-id +'%CHROM\_%POS' /home/gerald/Documents/PhD/papers/paper4/multi_sim_5000_22.vcf.gz -Oz -o /home/gerald/Documents/PhD/papers/paper4/multi_sim_5000_22_with_ids.vcf.gz
+
+plink --vcf multi_sim_5000_22_with_ids.vcf.gz --make-bed --out multi_sim_5000_22

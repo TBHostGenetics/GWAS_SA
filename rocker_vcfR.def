@@ -1,0 +1,13 @@
+Bootstrap: docker
+From: rocker/r-base:latest
+    
+%environment
+
+%setup
+    mkdir -p ${SINGULARITY_ROOTFS}/src
+    cp /home/gerald/Documents/PhD/papers/paper4/src/packages.R ${SINGULARITY_ROOTFS}/src/packages.R
+
+%post
+    apt-get update && apt-get install -y \
+    vim
+    Rscript ${SINGULARITY_ROOTFS}/src/packages.R
